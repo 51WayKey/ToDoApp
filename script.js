@@ -1,6 +1,7 @@
 const inputTextBox = document.getElementById("input-textbox")
-const tasklist = document.getElementById("tasklist")
-const tasks = JSON.parse(localStorage.getItem('tasks'))
+const taskList = document.getElementById("tasklist")
+const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+
 
 
 
@@ -18,12 +19,16 @@ function addTask() {
 
     inputTextBox.value === "";
 
+    affichage()
+
 }
 
 function deleteTask (index) {
     tasks.splice(index, 1)
 
     localStorage.setItem("tasks", JSON.stringify(tasks))
+
+    affichage()
 }
 
 function editTask (index) {
@@ -35,6 +40,8 @@ function editTask (index) {
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }
 
+    affichage()
+
 }
 
 function affichage() {
@@ -45,7 +52,7 @@ function affichage() {
         li.innerHTML = `
         <span>${task.text}</span>
         <button class="edit-button" onclick="editTask(${index})">Modifier</button>
-        <button class="delete-button" onclick="deleteTast(${index})">Supprimer</button>
+        <button class="delete-button" onclick="deleteTask(${index})">Supprimer</button>
         
         `;
 
