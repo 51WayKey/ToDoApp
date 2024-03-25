@@ -18,8 +18,27 @@ function addTask() {
     const task = { text : textTask }
     tasks.push(task)
 
-    localStorage.setItem(...)
+    localStorage.setItem("tasks", JSON.stringify(tasks))
 
     inputTextBox.value === "";
-    
+
 }
+
+function deleteTask (taskD) {
+    tasks.splice(taskD, 1)
+
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+}
+
+function editTask (taskE) {
+
+    const taskEdit = prompt("Edit the task: ", tasks[index].text)
+
+    if(taskEdit !== null) {
+        tasks[taskE].text == taskEdit;
+        localStorage.setItem("tasks", JSON.stringify(tasks))
+    }
+
+}
+
+
