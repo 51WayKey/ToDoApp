@@ -36,7 +36,7 @@ function editTask (index) {
     const taskEdit = prompt("Edit the task: ", tasks[index].text)
 
     if(taskEdit !== null) {
-        tasks[index].text == taskEdit;
+        tasks[index].text = taskEdit;
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }
 
@@ -53,13 +53,14 @@ function affichage() {
         <span>${task.text}</span>
         <button class="edit-button" onclick="editTask(${index})">Modifier</button>
         <button class="delete-button" onclick="deleteTask(${index})">Supprimer</button>
-        
         `;
 
         taskList.appendChild(li)
     })
         
     };
+
+    affichage()
 
 
 
