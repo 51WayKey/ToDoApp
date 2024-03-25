@@ -1,18 +1,14 @@
 const inputTextBox = document.getElementById("input-textbox")
-const addButton = document.getElementById("tasklist")
+const tasklist = document.getElementById("tasklist")
 const tasks = JSON.parse(localStorage.getItem('tasks'))
 
 
 
 function addTask() {
-    const textTask = inputTextBox.value
+    const textTask = inputTextBox.value.trim()
 
     if (!textTask) {
         alert("Veuillez rentrer une tâche")
-    }else {
-        let li = document.createElement("li")
-        li.innerHTML = textTask
-        addButton.appendChild(li)
     }
 
     const task = { text : textTask }
@@ -24,21 +20,39 @@ function addTask() {
 
 }
 
-function deleteTask (taskD) {
-    tasks.splice(taskD, 1)
+function deleteTask (index) {
+    tasks.splice(index, 1)
 
     localStorage.setItem("tasks", JSON.stringify(tasks))
 }
 
-function editTask (taskE) {
+function editTask (index) {
 
     const taskEdit = prompt("Edit the task: ", tasks[index].text)
 
     if(taskEdit !== null) {
-        tasks[taskE].text == taskEdit;
+        tasks[index].text == taskEdit;
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }
 
 }
+
+function affichage() {
+    taskList.innerHTML = "";
+
+    tasks.forEach((task, index) => {
+        const li = document.createElement("li")
+        li.innerHTML = `
+        <span>${task.text}</span>
+        <button class="edit-button" onclick="editTask(${index})">Modifier</button>
+        <button class="delete-button" onclick="deleteTast(${index})">Supprimer</button>
+        
+        `;
+
+        taskList.appendChild(li)
+    })
+        
+    };
+
 
 
